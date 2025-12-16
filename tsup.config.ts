@@ -14,6 +14,11 @@ export default defineConfig({
     "radio/index": "src/radio/index.ts",
     "switch/index": "src/switch/index.ts",
     "slider/index": "src/slider/index.ts",
+    // New primitives (not in Radix UI)
+    "toast/index": "src/toast/index.ts",
+    "command/index": "src/command/index.ts",
+    "sortable/index": "src/sortable/index.ts",
+    "stepper/index": "src/stepper/index.ts",
   },
   format: ["cjs", "esm"],
   dts: true,

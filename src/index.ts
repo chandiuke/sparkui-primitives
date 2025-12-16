@@ -108,10 +108,57 @@ export type {
   SliderThumbProps,
 } from "./slider";
 
+// ============================================
+// NEW PRIMITIVES (Not in Radix UI)
+// ============================================
+
+// Toast
+export * as Toast from "./toast";
+export { useToast } from "./toast";
+export type {
+  ToastProviderProps,
+  ToastViewportProps,
+  ToastRootProps,
+  ToastData,
+  ToastType,
+  ToastPosition,
+} from "./toast";
+
+// Command (Command Palette)
+export * as Command from "./command";
+export type {
+  CommandRootProps,
+  CommandInputProps,
+  CommandListProps,
+  CommandEmptyProps,
+  CommandGroupProps,
+  CommandItemProps,
+} from "./command";
+
+// Sortable (Drag & Drop)
+export * as Sortable from "./sortable";
+export type {
+  SortableRootProps,
+  SortableItemProps,
+  SortableHandleProps,
+} from "./sortable";
+
+// Stepper (Multi-step wizard)
+export * as Stepper from "./stepper";
+export type {
+  StepperRootProps,
+  StepperStepProps,
+  StepperContentProps,
+} from "./stepper";
+
+// ============================================
 // Utilities
+// ============================================
 export { composeRefs, useComposedRefs } from "./utils/compose-refs";
 export { Slot, Slottable } from "./utils/slot";
 export { useFloatingPosition } from "./utils/use-floating";
 export { useFocusTrap } from "./utils/use-focus-trap";
 export { useArrowNavigation } from "./utils/use-arrow-navigation";
 export { useTypeahead } from "./utils/use-typeahead";
+export { useAnimation, useAnimationState } from "./utils/use-animation";
+export { useVirtual } from "./utils/use-virtual";

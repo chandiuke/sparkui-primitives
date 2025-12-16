@@ -81,6 +81,26 @@
       "types": "./dist/slider/index.d.ts",
       "import": "./dist/slider/index.mjs",
       "require": "./dist/slider/index.js"
+    },
+    "./toast": {
+      "types": "./dist/toast/index.d.ts",
+      "import": "./dist/toast/index.mjs",
+      "require": "./dist/toast/index.js"
+    },
+    "./command": {
+      "types": "./dist/command/index.d.ts",
+      "import": "./dist/command/index.mjs",
+      "require": "./dist/command/index.js"
+    },
+    "./sortable": {
+      "types": "./dist/sortable/index.d.ts",
+      "import": "./dist/sortable/index.mjs",
+      "require": "./dist/sortable/index.js"
+    },
+    "./stepper": {
+      "types": "./dist/stepper/index.d.ts",
+      "import": "./dist/stepper/index.mjs",
+      "require": "./dist/stepper/index.js"
     }
   },
   "files": [
