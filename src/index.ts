@@ -108,6 +108,53 @@ export type {
   SliderThumbProps,
 } from "./slider";
 
+// Collapsible
+export * as Collapsible from "./collapsible";
+export type {
+  CollapsibleRootProps,
+  CollapsibleTriggerProps,
+  CollapsibleContentProps,
+} from "./collapsible";
+
+// Progress
+export * as Progress from "./progress";
+export type {
+  ProgressRootProps,
+  ProgressIndicatorProps,
+} from "./progress";
+
+// ScrollArea
+export * as ScrollArea from "./scroll-area";
+export type {
+  ScrollAreaRootProps,
+  ScrollAreaViewportProps,
+  ScrollAreaScrollbarProps,
+  ScrollAreaThumbProps,
+  ScrollAreaCornerProps,
+} from "./scroll-area";
+
+// Form
+export * as Form from "./form";
+export type {
+  FormRootProps,
+  FormFieldProps,
+  FormLabelProps,
+  FormControlProps,
+  FormMessageProps,
+  FormSubmitProps,
+} from "./form";
+
+// NavigationMenu
+export * as NavigationMenu from "./navigation-menu";
+export type {
+  NavigationMenuRootProps,
+  NavigationMenuListProps,
+  NavigationMenuItemProps,
+  NavigationMenuTriggerProps,
+  NavigationMenuContentProps,
+  NavigationMenuLinkProps,
+} from "./navigation-menu";
+
 // ============================================
 // NEW PRIMITIVES (Not in Radix UI)
 // ============================================

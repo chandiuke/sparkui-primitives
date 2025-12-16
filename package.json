@@ -106,6 +106,31 @@
       "types": "./dist/datepicker/index.d.ts",
       "import": "./dist/datepicker/index.mjs",
       "require": "./dist/datepicker/index.js"
+    },
+    "./collapsible": {
+      "types": "./dist/collapsible/index.d.ts",
+      "import": "./dist/collapsible/index.mjs",
+      "require": "./dist/collapsible/index.js"
+    },
+    "./progress": {
+      "types": "./dist/progress/index.d.ts",
+      "import": "./dist/progress/index.mjs",
+      "require": "./dist/progress/index.js"
+    },
+    "./scroll-area": {
+      "types": "./dist/scroll-area/index.d.ts",
+      "import": "./dist/scroll-area/index.mjs",
+      "require": "./dist/scroll-area/index.js"
+    },
+    "./form": {
+      "types": "./dist/form/index.d.ts",
+      "import": "./dist/form/index.mjs",
+      "require": "./dist/form/index.js"
+    },
+    "./navigation-menu": {
+      "types": "./dist/navigation-menu/index.d.ts",
+      "import": "./dist/navigation-menu/index.mjs",
+      "require": "./dist/navigation-menu/index.js"
     }
   },
   "files": [

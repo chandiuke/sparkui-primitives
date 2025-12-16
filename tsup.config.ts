@@ -14,6 +14,12 @@ export default defineConfig({
     "radio/index": "src/radio/index.ts",
     "switch/index": "src/switch/index.ts",
     "slider/index": "src/slider/index.ts",
+    // Additional Radix-like primitives
+    "collapsible/index": "src/collapsible/index.ts",
+    "progress/index": "src/progress/index.ts",
+    "scroll-area/index": "src/scroll-area/index.ts",
+    "form/index": "src/form/index.ts",
+    "navigation-menu/index": "src/navigation-menu/index.ts",
     // New primitives (not in Radix UI)
     "toast/index": "src/toast/index.ts",
     "command/index": "src/command/index.ts",
