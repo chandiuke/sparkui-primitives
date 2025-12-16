@@ -19,6 +19,7 @@ export default defineConfig({
     "command/index": "src/command/index.ts",
     "sortable/index": "src/sortable/index.ts",
     "stepper/index": "src/stepper/index.ts",
+    "datepicker/index": "src/datepicker/index.ts",
   },
   format: ["cjs", "esm"],
   dts: true,

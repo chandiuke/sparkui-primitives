@@ -25,6 +25,12 @@ export interface SelectContextValue {
   // For typeahead
   registerItem: (value: string, textValue?: string, disabled?: boolean) => void;
   unregisterItem: (value: string) => void;
+  // For searchable select
+  searchQuery?: string;
+  setSearchQuery?: (query: string) => void;
+  searchable?: boolean;
+  filterFn?: (value: string, search: string, textValue?: string) => boolean;
+  items?: Map<string, SelectOption>;
 }
 
 export interface SelectRootProps {
@@ -38,6 +44,10 @@ export interface SelectRootProps {
   disabled?: boolean;
   required?: boolean;
   name?: string;
+  /** Enable built-in search functionality */
+  searchable?: boolean;
+  /** Filter function for searchable select */
+  filterFn?: (value: string, search: string, textValue?: string) => boolean;
 }
 
 export interface SelectTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

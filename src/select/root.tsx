@@ -2,6 +2,15 @@ import * as React from "react";
 import { SelectContext } from "./context";
 import type { SelectRootProps, SelectOption } from "./types";
 
+// Default filter function for searchable select
+const defaultFilterFn = (value: string, search: string, textValue?: string) => {
+  const searchLower = search.toLowerCase();
+  return (
+    value.toLowerCase().includes(searchLower) ||
+    (textValue?.toLowerCase().includes(searchLower) ?? false)
+  );
+};
+
 export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTMLAttributes<HTMLDivElement>>(
   (
     {
@@ -15,6 +24,8 @@ export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTM
       disabled = false,
       required = false,
       name,
+      searchable = false,
+      filterFn = defaultFilterFn,
       ...props
     },
     ref
@@ -24,6 +35,7 @@ export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTM
     const [displayValue, setDisplayValue] = React.useState("");
     const [highlightedValue, setHighlightedValue] = React.useState<string | null>(null);
     const [items, setItems] = React.useState<Map<string, SelectOption>>(new Map());
+    const [searchQuery, setSearchQuery] = React.useState("");
 
     const triggerRef = React.useRef<HTMLButtonElement>(null);
     const triggerId = React.useId();
@@ -87,6 +99,13 @@ export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTM
       return () => document.removeEventListener("keydown", handleKeyDown);
     }, [open, handleOpenChange]);
 
+    // Clear search when closing
+    React.useEffect(() => {
+      if (!open) {
+        setSearchQuery("");
+      }
+    }, [open]);
+
     const contextValue = React.useMemo(
       () => ({
         open,
@@ -105,8 +124,12 @@ export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTM
         registerItem,
         unregisterItem,
         items,
+        searchable,
+        searchQuery,
+        setSearchQuery,
+        filterFn,
       }),
-      [open, handleOpenChange, value, handleValueChange, displayValue, disabled, required, highlightedValue, contentId, triggerId, registerItem, unregisterItem, items]
+      [open, handleOpenChange, value, handleValueChange, displayValue, disabled, required, highlightedValue, contentId, triggerId, registerItem, unregisterItem, items, searchable, searchQuery, filterFn]
     );
 
     return (

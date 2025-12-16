@@ -4,5 +4,7 @@ export { Value } from "./value";
 export { Content } from "./content";
 export { Item, ItemText, ItemIndicator } from "./item";
 export { Group, Label, Separator } from "./group";
+export { Search } from "./search";
 export { useSelectContext } from "./context";
 export type * from "./types";
+export type { SelectSearchProps } from "./search";

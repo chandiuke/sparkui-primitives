@@ -151,6 +151,16 @@ export type {
   StepperContentProps,
 } from "./stepper";
 
+// DatePicker
+export * as DatePicker from "./datepicker";
+export { useCalendarDays } from "./datepicker";
+export type {
+  DatePickerRootProps,
+  DatePickerTriggerProps,
+  DatePickerContentProps,
+  DatePickerDayProps,
+} from "./datepicker";
+
 // ============================================
 // Utilities
 // ============================================
@@ -162,3 +172,5 @@ export { useArrowNavigation } from "./utils/use-arrow-navigation";
 export { useTypeahead } from "./utils/use-typeahead";
 export { useAnimation, useAnimationState } from "./utils/use-animation";
 export { useVirtual } from "./utils/use-virtual";
+export { useAsync, useDebouncedAsync } from "./utils/use-async";
+export type { AsyncState, AsyncStatus, UseAsyncOptions, UseAsyncReturn } from "./utils/use-async";
