@@ -1,6 +1,6 @@
 # SparkUI Primitives
 
-Headless, unstyled UI primitives for building accessible React components. Like Radix UI, but for SparkUI.
+Headless, unstyled UI primitives for building accessible React components. Like Radix UI, but with extra features.
 
 ## Installation
 
@@ -10,9 +10,11 @@ npm install sparkui-primitives
 
 ## Available Primitives
 
+### Core Primitives (Radix-like)
+
 | Primitive | Description |
 |-----------|-------------|
-| `Select` | Customizable select/dropdown with search, multi-select support |
+| `Select` | Customizable select with **built-in search** support |
 | `Dropdown` | Menu dropdown with items, groups, and separators |
 | `Modal` | Dialog/modal with portal, overlay, and focus management |
 | `Accordion` | Collapsible content sections (single or multiple) |
@@ -24,88 +26,176 @@ npm install sparkui-primitives
 | `Switch` | Toggle switch |
 | `Slider` | Range slider with single or multiple thumbs |
 
-## Usage
+### 🚀 Unique Primitives (Not in Radix UI)
 
-### Select
+| Primitive | Description |
+|-----------|-------------|
+| `Toast` | Toast notifications with Provider, Viewport, and useToast hook |
+| `Command` | Command palette (like cmdk) with search, groups, and keyboard nav |
+| `Sortable` | Drag & drop sortable lists with pointer-based dragging |
+| `Stepper` | Multi-step wizard with navigation and validation |
+| `DatePicker` | Full-featured date picker with calendar, month/year views |
+
+### 🛠️ Utility Hooks
+
+| Hook | Description |
+|------|-------------|
+| `useAnimation` | Built-in enter/exit animation states |
+| `useVirtual` | Virtual scrolling for large lists |
+| `useAsync` | Async data loading with status management |
+| `useDebouncedAsync` | Debounced async operations (great for search) |
+| `useFloatingPosition` | Floating UI positioning with collision detection |
+| `useFocusTrap` | Focus trapping for modals |
+| `useArrowNavigation` | Arrow key navigation between items |
+| `useTypeahead` | Type-ahead search in lists |
+
+## Usage Examples
+
+### Select with Search
 
 ```tsx
 import { Select } from "sparkui-primitives";
 
-<Select.Root value={value} onValueChange={setValue}>
+<Select.Root searchable>
   <Select.Trigger>
     <Select.Value placeholder="Select..." />
   </Select.Trigger>
   <Select.Content>
+    <Select.Search placeholder="Search..." />
     <Select.Item value="apple">Apple</Select.Item>
     <Select.Item value="banana">Banana</Select.Item>
   </Select.Content>
 </Select.Root>
 ```
 
-### Modal
+### Toast Notifications
 
 ```tsx
-import { Modal } from "sparkui-primitives";
+import { Toast, useToast } from "sparkui-primitives";
 
-<Modal.Root open={open} onOpenChange={setOpen}>
-  <Modal.Trigger>Open Modal</Modal.Trigger>
-  <Modal.Portal>
-    <Modal.Overlay />
-    <Modal.Content>
-      <Modal.Title>Title</Modal.Title>
-      <Modal.Description>Description</Modal.Description>
-      <Modal.Close>Close</Modal.Close>
-    </Modal.Content>
-  </Modal.Portal>
-</Modal.Root>
+function App() {
+  return (
+    <Toast.Provider>
+      <MyComponent />
+      <Toast.Viewport />
+    </Toast.Provider>
+  );
+}
+
+function MyComponent() {
+  const { toast } = useToast();
+  
+  return (
+    <button onClick={() => toast({ title: "Success!", type: "success" })}>
+      Show Toast
+    </button>
+  );
+}
 ```
 
-### Accordion
+### Command Palette
 
 ```tsx
-import { Accordion } from "sparkui-primitives";
+import { Command } from "sparkui-primitives";
 
-<Accordion.Root type="single" collapsible>
-  <Accordion.Item value="item-1">
-    <Accordion.Trigger>Section 1</Accordion.Trigger>
-    <Accordion.Content>Content 1</Accordion.Content>
-  </Accordion.Item>
-</Accordion.Root>
+<Command.Root>
+  <Command.Input placeholder="Type a command..." />
+  <Command.List>
+    <Command.Empty>No results found.</Command.Empty>
+    <Command.Group heading="Actions">
+      <Command.Item onSelect={() => console.log("New file")}>
+        New File
+        <Command.Shortcut>⌘N</Command.Shortcut>
+      </Command.Item>
+    </Command.Group>
+  </Command.List>
+</Command.Root>
 ```
 
-### Tabs
+### Sortable List
 
 ```tsx
-import { Tabs } from "sparkui-primitives";
+import { Sortable } from "sparkui-primitives";
 
-<Tabs.Root defaultValue="tab1">
-  <Tabs.List>
-    <Tabs.Trigger value="tab1">Tab 1</Tabs.Trigger>
-    <Tabs.Trigger value="tab2">Tab 2</Tabs.Trigger>
-  </Tabs.List>
-  <Tabs.Content value="tab1">Content 1</Tabs.Content>
-  <Tabs.Content value="tab2">Content 2</Tabs.Content>
-</Tabs.Root>
+<Sortable.Root items={items} onReorder={setItems}>
+  {items.map((item) => (
+    <Sortable.Item key={item.id} id={item.id}>
+      <Sortable.Handle>⋮⋮</Sortable.Handle>
+      {item.label}
+    </Sortable.Item>
+  ))}
+</Sortable.Root>
 ```
 
-### Checkbox
+### Stepper (Multi-step Wizard)
 
 ```tsx
-import { Checkbox } from "sparkui-primitives";
+import { Stepper } from "sparkui-primitives";
 
-<Checkbox.Root checked={checked} onCheckedChange={setChecked}>
-  <Checkbox.Indicator>✓</Checkbox.Indicator>
-</Checkbox.Root>
+<Stepper.Root defaultStep={0}>
+  <Stepper.List>
+    <Stepper.Step step={0}>
+      <Stepper.Trigger>
+        <Stepper.Title>Step 1</Stepper.Title>
+      </Stepper.Trigger>
+    </Stepper.Step>
+    <Stepper.Separator />
+    <Stepper.Step step={1}>
+      <Stepper.Trigger>
+        <Stepper.Title>Step 2</Stepper.Title>
+      </Stepper.Trigger>
+    </Stepper.Step>
+  </Stepper.List>
+  
+  <Stepper.Content step={0}>Step 1 content</Stepper.Content>
+  <Stepper.Content step={1}>Step 2 content</Stepper.Content>
+  
+  <Stepper.Prev>Back</Stepper.Prev>
+  <Stepper.Next>Next</Stepper.Next>
+</Stepper.Root>
 ```
 
-### Switch
+### DatePicker
 
 ```tsx
-import { Switch } from "sparkui-primitives";
+import { DatePicker, useCalendarDays } from "sparkui-primitives";
 
-<Switch.Root checked={checked} onCheckedChange={setChecked}>
-  <Switch.Thumb />
-</Switch.Root>
+<DatePicker.Root value={date} onValueChange={setDate}>
+  <DatePicker.Trigger>
+    <DatePicker.Value placeholder="Pick a date" />
+  </DatePicker.Trigger>
+  <DatePicker.Content>
+    <DatePicker.Calendar>
+      <DatePicker.Header>
+        <DatePicker.Prev />
+        <DatePicker.Title />
+        <DatePicker.Next />
+      </DatePicker.Header>
+      <DatePicker.Grid>
+        <DatePicker.Head>
+          {[0,1,2,3,4,5,6].map(day => (
+            <DatePicker.HeadCell key={day} day={day} />
+          ))}
+        </DatePicker.Head>
+        <DatePicker.Body>
+          {/* Use useCalendarDays() hook for calendar data */}
+        </DatePicker.Body>
+      </DatePicker.Grid>
+    </DatePicker.Calendar>
+  </DatePicker.Content>
+</DatePicker.Root>
+```
+
+### Async Data Loading
+
+```tsx
+import { useAsync, useDebouncedAsync } from "sparkui-primitives";
+
+// Basic async
+const { data, isLoading, execute } = useAsync(fetchData);
+
+// Debounced for search
+const { data, debouncedExecute } = useDebouncedAsync(searchApi, 300);
 ```
 
 ## Styling
@@ -116,8 +206,9 @@ These primitives are completely unstyled. Use `data-*` attributes for styling:
 - `data-state="checked" | "unchecked"` - Checked state
 - `data-state="active" | "inactive"` - Active tab state
 - `data-disabled` - Disabled state
-- `data-side="top" | "bottom" | "left" | "right"` - Position side
-- `data-align="start" | "center" | "end"` - Position alignment
+- `data-selected` - Selected item
+- `data-today` - Today's date (DatePicker)
+- `data-dragging` - Currently dragging (Sortable)
 
 Example with Tailwind:
 
