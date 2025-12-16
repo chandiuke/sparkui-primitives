@@ -16,6 +16,7 @@ export interface DropdownContentProps extends React.HTMLAttributes<HTMLDivElemen
   sideOffset?: number;
   align?: "start" | "center" | "end";
   alignOffset?: number;
+  avoidCollisions?: boolean;
 }
 
 export interface DropdownItemProps extends React.HTMLAttributes<HTMLDivElement> {

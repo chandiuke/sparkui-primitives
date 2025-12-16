@@ -1,7 +1,10 @@
+import type { Placement } from "../utils/use-floating";
+
 export interface SelectOption {
   value: string;
   label: string;
   disabled?: boolean;
+  textValue?: string;
 }
 
 export interface SelectContextValue {
@@ -17,6 +20,11 @@ export interface SelectContextValue {
   setHighlightedValue: (value: string | null) => void;
   contentId: string;
   triggerId: string;
+  // For floating positioning
+  triggerRef: React.RefObject<HTMLButtonElement>;
+  // For typeahead
+  registerItem: (value: string, textValue?: string, disabled?: boolean) => void;
+  unregisterItem: (value: string) => void;
 }
 
 export interface SelectRootProps {
@@ -46,6 +54,9 @@ export interface SelectContentProps extends React.HTMLAttributes<HTMLDivElement>
   side?: "top" | "bottom";
   sideOffset?: number;
   align?: "start" | "center" | "end";
+  // Advanced positioning
+  avoidCollisions?: boolean;
+  collisionPadding?: number;
 }
 
 export interface SelectItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

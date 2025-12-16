@@ -1,13 +1,20 @@
 import * as React from "react";
 import { useModalContext } from "./context";
 import { useComposedRefs } from "../utils/compose-refs";
+import { useFocusTrap } from "../utils/use-focus-trap";
 import type { ModalContentProps } from "./types";
 
 export const Content = React.forwardRef<HTMLDivElement, ModalContentProps>(
-  ({ children, onEscapeKeyDown, onPointerDownOutside, style, ...props }, ref) => {
+  ({ children, onEscapeKeyDown, onPointerDownOutside, onOpenAutoFocus, onCloseAutoFocus, trapFocus = true, style, ...props }, ref) => {
     const ctx = useModalContext();
     const contentRef = React.useRef<HTMLDivElement>(null);
     const composedRef = useComposedRefs(contentRef, ref);
+
+    // Focus trapping
+    useFocusTrap(contentRef, {
+      enabled: ctx.open && trapFocus,
+      returnFocus: true,
+    });
 
     // Handle escape key
     React.useEffect(() => {
@@ -42,6 +49,21 @@ export const Content = React.forwardRef<HTMLDivElement, ModalContentProps>(
       document.addEventListener("mousedown", handlePointerDown);
       return () => document.removeEventListener("mousedown", handlePointerDown);
     }, [ctx.open, ctx.setOpen, onPointerDownOutside]);
+
+    // Auto focus callbacks
+    React.useEffect(() => {
+      if (ctx.open) {
+        onOpenAutoFocus?.();
+      }
+    }, [ctx.open, onOpenAutoFocus]);
+
+    React.useEffect(() => {
+      return () => {
+        if (!ctx.open) {
+          onCloseAutoFocus?.();
+        }
+      };
+    }, [ctx.open, onCloseAutoFocus]);
 
     if (!ctx.open) return null;
 

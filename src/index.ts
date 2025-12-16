@@ -111,3 +111,7 @@ export type {
 // Utilities
 export { composeRefs, useComposedRefs } from "./utils/compose-refs";
 export { Slot, Slottable } from "./utils/slot";
+export { useFloatingPosition } from "./utils/use-floating";
+export { useFocusTrap } from "./utils/use-focus-trap";
+export { useArrowNavigation } from "./utils/use-arrow-navigation";
+export { useTypeahead } from "./utils/use-typeahead";

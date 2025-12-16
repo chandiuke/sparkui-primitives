@@ -1,12 +1,14 @@
 import * as React from "react";
 import { useSelectContext } from "./context";
 import { Slot } from "../utils";
+import { useComposedRefs } from "../utils/compose-refs";
 import type { SelectTriggerProps } from "./types";
 
 export const Trigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
   ({ asChild, children, onClick, onKeyDown, ...props }, ref) => {
     const ctx = useSelectContext();
     const Comp = asChild ? Slot : "button";
+    const composedRef = useComposedRefs(ref, ctx.triggerRef);
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       if (ctx.disabled) return;
@@ -31,7 +33,7 @@ export const Trigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
 
     return (
       <Comp
-        ref={ref}
+        ref={composedRef}
         type="button"
         role="combobox"
         id={ctx.triggerId}

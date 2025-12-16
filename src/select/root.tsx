@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SelectContext } from "./context";
-import type { SelectRootProps } from "./types";
+import type { SelectRootProps, SelectOption } from "./types";
 
 export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTMLAttributes<HTMLDivElement>>(
   (
@@ -23,7 +23,9 @@ export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTM
     const [internalOpen, setInternalOpen] = React.useState(defaultOpen);
     const [displayValue, setDisplayValue] = React.useState("");
     const [highlightedValue, setHighlightedValue] = React.useState<string | null>(null);
+    const [items, setItems] = React.useState<Map<string, SelectOption>>(new Map());
 
+    const triggerRef = React.useRef<HTMLButtonElement>(null);
     const triggerId = React.useId();
     const contentId = React.useId();
 
@@ -56,11 +58,29 @@ export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTM
       [isOpenControlled, onOpenChange]
     );
 
+    // Register/unregister items for typeahead
+    const registerItem = React.useCallback((itemValue: string, textValue?: string, itemDisabled?: boolean) => {
+      setItems((prev) => {
+        const next = new Map(prev);
+        next.set(itemValue, { value: itemValue, label: textValue || itemValue, textValue, disabled: itemDisabled });
+        return next;
+      });
+    }, []);
+
+    const unregisterItem = React.useCallback((itemValue: string) => {
+      setItems((prev) => {
+        const next = new Map(prev);
+        next.delete(itemValue);
+        return next;
+      });
+    }, []);
+
     // Close on escape
     React.useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === "Escape" && open) {
           handleOpenChange(false);
+          triggerRef.current?.focus();
         }
       };
       document.addEventListener("keydown", handleKeyDown);
@@ -81,8 +101,12 @@ export const Root = React.forwardRef<HTMLDivElement, SelectRootProps & React.HTM
         setHighlightedValue,
         contentId,
         triggerId,
+        triggerRef,
+        registerItem,
+        unregisterItem,
+        items,
       }),
-      [open, handleOpenChange, value, handleValueChange, displayValue, disabled, required, highlightedValue, contentId, triggerId]
+      [open, handleOpenChange, value, handleValueChange, displayValue, disabled, required, highlightedValue, contentId, triggerId, registerItem, unregisterItem, items]
     );
 
     return (

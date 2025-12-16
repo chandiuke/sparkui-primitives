@@ -21,6 +21,9 @@ export interface ModalOverlayProps extends React.HTMLAttributes<HTMLDivElement> 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
   onEscapeKeyDown?: (e: KeyboardEvent) => void;
   onPointerDownOutside?: (e: MouseEvent) => void;
+  onOpenAutoFocus?: () => void;
+  onCloseAutoFocus?: () => void;
+  trapFocus?: boolean;
 }
 
 export interface ModalCloseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
