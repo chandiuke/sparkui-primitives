@@ -1,0 +1,107 @@
+{
+  "name": "sparkui-primitives",
+  "version": "0.1.0",
+  "description": "Headless, unstyled UI primitives for SparkUI",
+  "author": "chandiuke",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chandiuke/sparkui-primitives.git"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "primitives",
+    "headless",
+    "unstyled",
+    "ui",
+    "sparkui"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./select": {
+      "types": "./dist/select/index.d.ts",
+      "import": "./dist/select/index.mjs",
+      "require": "./dist/select/index.js"
+    },
+    "./dropdown": {
+      "types": "./dist/dropdown/index.d.ts",
+      "import": "./dist/dropdown/index.mjs",
+      "require": "./dist/dropdown/index.js"
+    },
+    "./modal": {
+      "types": "./dist/modal/index.d.ts",
+      "import": "./dist/modal/index.mjs",
+      "require": "./dist/modal/index.js"
+    },
+    "./accordion": {
+      "types": "./dist/accordion/index.d.ts",
+      "import": "./dist/accordion/index.mjs",
+      "require": "./dist/accordion/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "import": "./dist/tabs/index.mjs",
+      "require": "./dist/tabs/index.js"
+    },
+    "./popover": {
+      "types": "./dist/popover/index.d.ts",
+      "import": "./dist/popover/index.mjs",
+      "require": "./dist/popover/index.js"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip/index.d.ts",
+      "import": "./dist/tooltip/index.mjs",
+      "require": "./dist/tooltip/index.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/index.d.ts",
+      "import": "./dist/checkbox/index.mjs",
+      "require": "./dist/checkbox/index.js"
+    },
+    "./radio": {
+      "types": "./dist/radio/index.d.ts",
+      "import": "./dist/radio/index.mjs",
+      "require": "./dist/radio/index.js"
+    },
+    "./switch": {
+      "types": "./dist/switch/index.d.ts",
+      "import": "./dist/switch/index.mjs",
+      "require": "./dist/switch/index.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/index.d.ts",
+      "import": "./dist/slider/index.mjs",
+      "require": "./dist/slider/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
+  }
+}
